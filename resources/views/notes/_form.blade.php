@@ -20,3 +20,12 @@
                 </label>
             </div>
         </div>
+        <div class="form-group">
+            <label for="grupo">Grupo</label>
+            <select name="group_id" class="form-control" id="grupo">
+            <option value="">--NINGUNO--</option>
+            @foreach ($groups as $g)
+            <option value="{{$g->id}}">{{ $g->name }}</option>
+            @endforeach           
+            </select>
+        </div>

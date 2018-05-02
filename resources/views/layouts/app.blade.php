@@ -31,6 +31,9 @@
                 </li>
                 <li class="nav-item {{ Request::is('contacto') ? 'active' : '' }} ">
                     <a class="nav-link" href="/contacto">Contacto</a>
+                </li>
+                <li class="nav-item {{ Request::is('contacto') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/api/v1/notes">API</a>
                 </li>            
             </ul>            
         </div>

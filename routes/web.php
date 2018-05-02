@@ -11,6 +11,8 @@ Route::get('/contacto', function () {
 });
 
 Route::get('/notes', 'NotesController@index');
+Route::get('/groups/{gruop}/notes', 'NotesController@index');
+
 Route::post('/notes', 'NotesController@store');
 
 Route::get('/notes/create', 'NotesController@create');
@@ -24,3 +26,4 @@ Route::delete('/notes/{note}', 'NotesController@destroy');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/api/v1/notes','NotesController@getNotes');

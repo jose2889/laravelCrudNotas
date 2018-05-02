@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Note;
+use App\Group;
 use App\Http\Requests\NotesRequest;
 
 class NotesController extends Controller
 {
     // metodos para el controlador de notas
-    public function index(){
+    public function index(Group $gruop){
 
     // $notes = DB::table('notes')->get(); esta sentencia trabaja con el constructor de consultas
-        
-        $notes = Note::all();
+        $groups = Group::all();
+        $notes = $gruop->notes;
 
-        return view('notes.index', ['notes' => $notes]);
+        return view('notes.index', compact('groups','notes'));
     }
 
     public function show(Note $note){
@@ -25,10 +26,12 @@ class NotesController extends Controller
     }
     public function create(){
       
-        return view('notes.create');
+        $groups = Group::all();
+        return view('notes.create', compact('groups'));
     } 
     public function store(){
         
+        // dd(request()->all());
         request()->validate([
             'title' => 'required',
             'body' => 'required'
@@ -47,8 +50,9 @@ class NotesController extends Controller
 
     public function edit(Note $note){
         
+        $groups = Group::all();
        
-        return view('notes.edit', compact('note'));
+        return view('notes.edit', compact('note','groups'));
         // return back(); para regresar al mismo formulario
     } 
     public function update(Note $note, NotesRequest $request){
@@ -81,5 +85,8 @@ class NotesController extends Controller
 
        return redirect('/notes');       
     } 
-    
+    public function getNotes(){
+        $notes=Note::all();
+        return response()->json($notes);
+    }
 }
